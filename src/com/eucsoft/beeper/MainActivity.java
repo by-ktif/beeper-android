@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.widget.Button;
 
 import com.eucsoft.beeper.button.record.RecordButtonListener;
+import com.eucsoft.beeper.http.test.TestButtonListener;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +28,9 @@ public class MainActivity extends Activity {
 	private void addListenerOnButtons() {
 		Button button = (Button) findViewById(R.id.recordButton);
 		button.setOnClickListener(new RecordButtonListener());
+		
+		Button testButton = (Button) findViewById(R.id.testButton);
+		testButton.setOnClickListener(new TestButtonListener());
 	}
 
 }

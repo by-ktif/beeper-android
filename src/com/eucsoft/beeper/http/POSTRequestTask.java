@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -29,11 +30,13 @@ public class POSTRequestTask extends AsyncTask<NameValuePair, Void, Void> {
 
 	        // Execute HTTP Post Request
 	        HttpResponse response = httpclient.execute(httppost);
+	        StatusLine status = response.getStatusLine();
+	        System.out.println(status.getStatusCode());
 	        
 	    } catch (ClientProtocolException e) {
-	        // TODO Auto-generated catch block
+	    	e.printStackTrace();
 	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
+	    	e.printStackTrace();
 	    }
 	    
 	    return null;
