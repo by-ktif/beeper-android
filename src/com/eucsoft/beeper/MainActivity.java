@@ -17,9 +17,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		addListenerOnButtons();
-
-		AudioRecorder recorder = new AudioRecorder();
-		recorder.startRecording();
 	}
 
 	@Override
