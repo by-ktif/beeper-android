@@ -12,6 +12,6 @@ public class TestButtonListener implements OnClickListener {
 	public void onClick(View arg0) {
 		new POSTRequestTask().execute();
 		
-		new DownloadFileTask().execute("http://www.yoursite.com/script.php");
+		new DownloadFileTask().execute("http://www.w3schools.com/html/horse.ogg");
 	}
 }

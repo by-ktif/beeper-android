@@ -21,6 +21,7 @@ public class DownloadFileTask extends AsyncTask<String, Integer, File>{
 
     @Override
     protected File doInBackground(String... uri) {
+    	File result = null;
     	String messageListUrl = uri[0];
     	
         try {
@@ -37,7 +38,7 @@ public class DownloadFileTask extends AsyncTask<String, Integer, File>{
                 	messagesDir.mkdir();
                 }
                 
-                String messagePath = messagesDir.getAbsolutePath() + "/test.mp3";
+                String messagePath = messagesDir.getAbsolutePath() + "/test.ogg";
                 File message = new File(messagePath);
             	message.deleteOnExit();
             	
@@ -45,6 +46,8 @@ public class DownloadFileTask extends AsyncTask<String, Integer, File>{
 
                 out.writeTo(fos);
                 out.close();
+                
+                result = message;
             } else{
                 //Closes the connection.
                 response.getEntity().getContent().close();
@@ -55,7 +58,8 @@ public class DownloadFileTask extends AsyncTask<String, Integer, File>{
         } catch (IOException e) {
         	e.printStackTrace();
         }
-        return new File("");
+        
+        return result;
     }
 
     @Override
