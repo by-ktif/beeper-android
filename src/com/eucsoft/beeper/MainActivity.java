@@ -28,7 +28,8 @@ public class MainActivity extends Activity {
 	
 	private void addListenerOnButtons() {
 		Button button = (Button) findViewById(R.id.recordButton);
-		button.setOnClickListener(new RecordButtonListener());
+		RecordButtonListener recordButtonListener = new RecordButtonListener();
+		button.setOnTouchListener(recordButtonListener);
 	}
 
 }

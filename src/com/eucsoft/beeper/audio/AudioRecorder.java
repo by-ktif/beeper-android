@@ -22,7 +22,7 @@ public class AudioRecorder {
 		}
 		
 		String filePath = recordDir.getAbsolutePath();
-		filePath += "rec.3gp";
+		filePath += "/rec12.3gp";
 		
 		
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
