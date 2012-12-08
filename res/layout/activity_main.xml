@@ -5,6 +5,13 @@
     android:weightSum="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
+        android:id="@+id/testButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="30dp"
+        android:text="TEST" />
+
+    <Button
         android:id="@+id/recordButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
