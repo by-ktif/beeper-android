@@ -1,12 +1,10 @@
 package com.eucsoft.beeper;
 
 import android.app.Activity;
-import android.media.AudioRecord;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 
-import com.eucsoft.beeper.audio.AudioRecorder;
 import com.eucsoft.beeper.button.record.RecordButtonListener;
 import com.eucsoft.beeper.http.test.TestButtonListener;
 

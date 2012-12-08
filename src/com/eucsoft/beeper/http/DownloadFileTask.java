@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -20,35 +21,45 @@ public class DownloadFileTask extends AsyncTask<String, Integer, File>{
 
     @Override
     protected File doInBackground(String... uri) {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
-        String responseString = null;
+    	File result = null;
+    	String messageListUrl = uri[0];
+    	
         try {
+        	HttpClient httpclient = new DefaultHttpClient();
         	
-        	
-        	
-            response = httpclient.execute(new HttpGet(uri[0]));
+        	HttpResponse response = httpclient.execute(new HttpGet(messageListUrl));
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 response.getEntity().writeTo(out);
+
+                File messagesDir = new File(Environment.getExternalStorageDirectory() + "/messages");
+                if (!messagesDir.exists()) {
+                	messagesDir.mkdir();
+                }
+                
+                String messagePath = messagesDir.getAbsolutePath() + "/test.ogg";
+                File message = new File(messagePath);
+            	message.deleteOnExit();
+            	
+                FileOutputStream fos = new FileOutputStream(message);
+
+                out.writeTo(fos);
                 out.close();
                 
-                String PATH_op = Environment.getExternalStorageDirectory() + "/download/sound.mp3";
-                FileOutputStream fos = new FileOutputStream(new File(PATH_op));
-                
-                out.writeTo(fos);
+                result = message;
             } else{
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
         } catch (ClientProtocolException e) {
-            //TODO Handle problems..
+        	e.printStackTrace();
         } catch (IOException e) {
-            //TODO Handle problems..
+        	e.printStackTrace();
         }
-        return new File("");
+        
+        return result;
     }
 
     @Override
