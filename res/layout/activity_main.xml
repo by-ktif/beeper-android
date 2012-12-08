@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="118dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="300dp"
         android:src="@android:drawable/ic_btn_speak_now" />
-
+    
 </RelativeLayout>
