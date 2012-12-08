@@ -26,11 +26,12 @@ public class MainActivity extends Activity {
 	}
 	
 	private void addListenerOnButtons() {
-		Button button = (Button) findViewById(R.id.recordButton);
-		button.setOnClickListener(new RecordButtonListener());
-		
 		Button testButton = (Button) findViewById(R.id.testButton);
 		testButton.setOnClickListener(new TestButtonListener());
+		
+		Button button = (Button) findViewById(R.id.recordButton);
+		button.setOnTouchListener(new RecordButtonListener());
+
 	}
 
 }
