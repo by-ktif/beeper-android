@@ -4,14 +4,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="300dp"
-        android:src="@android:drawable/ic_btn_speak_now" />
-    
+	<Button
+	    android:layout_width="50sp"
+	    android:layout_height="50sp"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="86dp"
+	    android:layout_marginLeft="75dp"
+	    android:background="@drawable/record_button"
+	    android:gravity="center_vertical|center_horizontal"
+	    android:text="hello"
+	    android:textColor="#fff" />
+
 </RelativeLayout>
