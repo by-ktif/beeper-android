@@ -4,15 +4,19 @@ import java.io.IOException;
 
 import android.media.MediaRecorder;
 
-public class AudioRecord {
+public class AudioRecorder {
 
 	private MediaRecorder recorder;
 
 	public void startRecording() {
+		
+		
+		
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		
 		recorder.setOutputFile("test");
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
 		try {

@@ -1,6 +1,6 @@
 package com.eucsoft.beeper.button.record;
 
-import com.eucsoft.beeper.audio.AudioRecord;
+import com.eucsoft.beeper.audio.AudioRecorder;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,7 +8,6 @@ import android.widget.Button;
 
 public class RecordButtonListener implements OnClickListener {
 	
-	private static AudioRecord recorder = null;
 
 	@Override
 	public void onClick(View v) {
@@ -22,13 +21,9 @@ public class RecordButtonListener implements OnClickListener {
 		}
 		b.setText(String.valueOf(++i));
 		
-		if (recorder == null) {
-			recorder = new AudioRecord();
-			recorder.startRecording();
-		} else {
-			recorder.stopRecording();
-			recorder = null;
-		}
+		AudioRecorder recorder = new AudioRecorder();
+		recorder.startRecording();
+		recorder.stopRecording();
 	}
 	
 }
