@@ -9,6 +9,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="30dp"
-        android:background="@drawable/record_button" />
+        android:background="@drawable/button_background" />
 
 </LinearLayout>
