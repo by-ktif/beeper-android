@@ -3,9 +3,9 @@ package com.eucsoft.beeper;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.eucsoft.beeper.button.record.RecordButtonListener;
 
 public class MainActivity extends Activity {
 
@@ -26,14 +26,7 @@ public class MainActivity extends Activity {
 	
 	private void addListenerOnButtons() {
 		Button button = (Button) findViewById(R.id.recordButton);
-		button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				System.out.println("Listener");
-				
-			}
-		});
+		button.setOnClickListener(new RecordButtonListener());
 	}
 
 }

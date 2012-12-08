@@ -1,6 +1,14 @@
 package com.eucsoft.beeper.button.record;
 
-public class RecordButtonListener {
+import android.view.View;
+import android.view.View.OnClickListener;
+
+public class RecordButtonListener implements OnClickListener {
+
+	@Override
+	public void onClick(View v) {
+		v.setBackgroundColor(0);
+	}
 	
 	
 
