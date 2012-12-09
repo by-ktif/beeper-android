@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
+import com.eucsoft.beeper.application.ApplicationContext;
 import com.eucsoft.beeper.audio.AudioRecorder;
 import com.eucsoft.beeper.http.SendMessageTask;
 
@@ -16,25 +17,40 @@ public class RecordButtonListener implements OnTouchListener{
 	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction() ) {
 	    	case MotionEvent.ACTION_DOWN:
-	    		v.setPressed(true);
-	    		Button b = ((Button)v);
-	    		String text = b.getText().toString();
-	    		int i = 0;
-	    		try {
-	    			i = Integer.parseInt(text);
-	    		} catch(Exception e) {
-	    			i = 0;
-	    		}
-	    		b.setText(String.valueOf(++i));
-	    		recorder = new AudioRecorder();
-	    		recorder.startRecording();
+	    		onDown(v);
+	    		addNumberToButton(v);
 	    		break;
 	    	case MotionEvent.ACTION_UP:
-	    		v.setPressed(false);
-	    		String filePath = recorder.stopRecording();
-	    		new SendMessageTask().execute(filePath,"1","1");
+	    		onUp(v);
 	    		break;
 	    }
 	    return true;
-	}	
+	}
+	
+	private void onDown(View v) {
+		v.setPressed(true);
+		
+		recorder = new AudioRecorder();
+		recorder.startRecording();
+	}
+	
+	private void onUp(View v) {
+		v.setPressed(false);
+		String filePath = recorder.stopRecording();
+		new SendMessageTask().execute(filePath, ApplicationContext.userId, ApplicationContext.channelId);
+	}
+	
+	private void addNumberToButton(View v) {
+		Button recordButton = ((Button)v);
+		String text = recordButton.getText().toString();
+		int countPress = 0;
+		try {
+			countPress = Integer.parseInt(text);
+		} catch(Exception e) {
+			countPress = 0;
+		}
+		recordButton.setText(String.valueOf(++countPress));
+	}
+	
+	
 }
