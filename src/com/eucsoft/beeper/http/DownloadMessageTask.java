@@ -34,7 +34,6 @@ public class DownloadMessageTask extends AsyncTask<String, Integer, File>{
                 response.getEntity().writeTo(out);
 
                 String messagePath = FileUtil.getUniqFilePath();
-
                 File message = new File(messagePath);
                 FileOutputStream fileOutput = new FileOutputStream(message);
 

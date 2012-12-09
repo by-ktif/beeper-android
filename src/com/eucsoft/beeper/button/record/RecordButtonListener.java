@@ -6,6 +6,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 import com.eucsoft.beeper.audio.AudioRecorder;
+import com.eucsoft.beeper.http.SendMessageTask;
 
 public class RecordButtonListener implements OnTouchListener{
 	
@@ -30,7 +31,8 @@ public class RecordButtonListener implements OnTouchListener{
 	    		break;
 	    	case MotionEvent.ACTION_UP:
 	    		v.setPressed(false);
-	    		recorder.stopRecording();
+	    		String filePath = recorder.stopRecording();
+	    		new SendMessageTask().execute(filePath,"1","1");
 	    		break;
 	    }
 	    return true;
