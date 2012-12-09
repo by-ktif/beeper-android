@@ -13,10 +13,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.eucsoft.beeper.file.FileUtil;
-
 import android.os.AsyncTask;
-import android.os.Environment;
+
+import com.eucsoft.beeper.file.FileUtil;
 
 public class DownloadMessageTask extends AsyncTask<String, Integer, File>{
 
@@ -43,7 +42,7 @@ public class DownloadMessageTask extends AsyncTask<String, Integer, File>{
                 out.close();
 
                 result = message;
-            } else{
+            } else {
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
@@ -58,8 +57,8 @@ public class DownloadMessageTask extends AsyncTask<String, Integer, File>{
     }
 
     @Override
-    protected void onPostExecute(File result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(File file) {
+        super.onPostExecute(file);
         //Do anything with response..
     }
 }
