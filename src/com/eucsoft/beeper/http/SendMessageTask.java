@@ -21,7 +21,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 	@Override
 	protected File doInBackground(String... params) {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpPost httpPost = new HttpPost("http://beeper.com:8087/upload.do");
+		HttpPost httpPost = new HttpPost("http://192.168.1.101:8080/upload.do");
 		
 		String filePath = params[0];
 		File file = new File(filePath);
@@ -33,7 +33,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 			FileBody fileBody = new FileBody(file);
 			entity.addPart("file", fileBody);
 			entity.addPart("userId", new StringBody(userId, Charset.forName("UTF-8")));
-			entity.addPart("clientId", new StringBody(clientId, Charset.forName("UTF-8")));
+			entity.addPart("channelId", new StringBody(clientId, Charset.forName("UTF-8")));
 			
 			httpPost.setEntity(entity);
 			httpClient.execute(httpPost);

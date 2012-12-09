@@ -3,27 +3,20 @@ package com.eucsoft.beeper.audio;
 import java.io.File;
 import java.io.IOException;
 
+import com.eucsoft.beeper.file.FileUtil;
+
 import android.media.MediaRecorder;
 
 public class AudioRecorder {
 
 	private MediaRecorder recorder;
+	private String filePath;
 
 	public void startRecording() {
-		
-		
-		
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		
-		File recordDir = new File(android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/record");
-		if (!recordDir.exists()) {
-			recordDir.mkdir();
-		}
-		
-		String filePath = recordDir.getAbsolutePath();
-		filePath += "/rec.3gp";
-		
+			
+		filePath = FileUtil.getUniqFilePath();
 		
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.setOutputFile(filePath);
@@ -38,10 +31,11 @@ public class AudioRecorder {
 		recorder.start();
 	}
 
-	public void stopRecording() {
+	public String stopRecording() {
 		recorder.stop();
 		recorder.release();
 		recorder = null;
+		return filePath;
 	}
 
 }
