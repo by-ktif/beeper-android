@@ -2,46 +2,48 @@ package com.eucsoft.beeper.http;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.charset.Charset;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.eucsoft.beeper.file.FileUtil;
 
 import android.os.AsyncTask;
 
-public class SendMessageTask extends AsyncTask<NameValuePair, Void, File> {
+import com.eucsoft.beeper.file.FileUtil;
+
+public class SendMessageTask extends AsyncTask<String, Void, File> {
 
 	@Override
-	protected File doInBackground(NameValuePair... params) {
-		// Create a new HttpClient and Post Header
+	protected File doInBackground(String... params) {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost("http://beeper.com:8087/upload.do");
+		
+		String filePath = params[0];
+		File file = new File(filePath);
+		String userId = params[1];
+		String clientId = params[2];
 
 		try {
-			// Add your data
-			List<NameValuePair> nameValuePairs = Arrays.asList(params);
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-			// Execute HTTP Post Request
-			HttpResponse response = httpClient.execute(httpPost);
-			StatusLine status = response.getStatusLine();
-			System.out.println(status.getStatusCode());
+			MultipartEntity entity = new MultipartEntity();
+			FileBody fileBody = new FileBody(file);
+			entity.addPart("file", fileBody);
+			entity.addPart("userId", new StringBody(userId, Charset.forName("UTF-8")));
+			entity.addPart("clientId", new StringBody(clientId, Charset.forName("UTF-8")));
+			
+			httpPost.setEntity(entity);
+			httpClient.execute(httpPost);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return file;
 	}
 
 	@Override
