@@ -14,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
+import com.eucsoft.beeper.application.ApplicationContext;
 import com.eucsoft.beeper.file.FileUtil;
 
 public class SendMessageTask extends AsyncTask<String, Void, File> {
@@ -21,7 +22,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 	@Override
 	protected File doInBackground(String... params) {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpPost httpPost = new HttpPost("http://192.168.1.101:8080/upload.do");
+		HttpPost httpPost = new HttpPost(ApplicationContext.serverUrl + "/" + ApplicationContext.uploadUrl);
 		
 		String filePath = params[0];
 		File file = new File(filePath);
