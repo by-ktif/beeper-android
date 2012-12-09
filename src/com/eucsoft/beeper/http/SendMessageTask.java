@@ -15,7 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-public class POSTRequestTask extends AsyncTask<NameValuePair, Void, Void> {
+public class SendMessageTask extends AsyncTask<NameValuePair, Void, Void> {
 
 	@Override
 	protected Void doInBackground(NameValuePair... params) {
