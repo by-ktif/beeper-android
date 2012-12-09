@@ -57,8 +57,8 @@ public class DownloadMessageTask extends AsyncTask<String, Integer, File>{
     }
 
     @Override
-    protected void onPostExecute(File result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(File file) {
+        super.onPostExecute(file);
         //Do anything with response..
     }
 }
