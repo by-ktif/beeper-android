@@ -1,11 +1,10 @@
 package com.eucsoft.beeper.audio;
 
-import java.io.File;
 import java.io.IOException;
 
-import com.eucsoft.beeper.file.FileUtil;
-
 import android.media.MediaRecorder;
+
+import com.eucsoft.beeper.file.FileUtil;
 
 public class AudioRecorder {
 

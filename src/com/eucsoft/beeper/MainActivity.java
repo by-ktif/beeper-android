@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.eucsoft.beeper.button.record.RecordButtonListener;
 import com.eucsoft.beeper.http.test.TestButtonListener;
@@ -26,8 +27,8 @@ public class MainActivity extends Activity {
 	}
 	
 	private void addListenerOnButtons() {
-		Button testButton = (Button) findViewById(R.id.testButton);
-		testButton.setOnClickListener(new TestButtonListener());
+		ImageButton changeButton = (ImageButton) findViewById(R.id.spinRouletteButton);
+		changeButton.setOnClickListener(new TestButtonListener());
 		
 		Button button = (Button) findViewById(R.id.recordButton);
 		button.setOnTouchListener(new RecordButtonListener());
