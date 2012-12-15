@@ -6,6 +6,12 @@
     android:weightSum="1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
     
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text=">" />
+    
 	<FrameLayout
            android:layout_width="fill_parent" android:layout_height="0dp"
            android:layout_weight="0.1">
