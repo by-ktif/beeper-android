@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.eucsoft.beeper.button.record.RecordButtonListener;
+import com.eucsoft.beeper.http.test.PlayAudioButtonListener;
 import com.eucsoft.beeper.http.test.TestButtonListener;
 
 public class MainActivity extends Activity {
@@ -32,6 +33,9 @@ public class MainActivity extends Activity {
 		
 		Button button = (Button) findViewById(R.id.recordButton);
 		button.setOnTouchListener(new RecordButtonListener());
+		
+		Button playAudioButton = (Button) findViewById(R.id.playButton);
+		playAudioButton.setOnClickListener(new PlayAudioButtonListener());
 
 	}
 
