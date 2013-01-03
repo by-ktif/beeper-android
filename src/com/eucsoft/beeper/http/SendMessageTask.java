@@ -22,8 +22,8 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 	@Override
 	protected File doInBackground(String... params) {
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpPost httpPost = new HttpPost(ApplicationContext.serverUrl + "/" + ApplicationContext.uploadUrl);
-		
+		HttpPost httpPost = new HttpPost(ApplicationContext.serverUrl + "/"+ ApplicationContext.uploadUrl);
+
 		String filePath = params[0];
 		File file = new File(filePath);
 		String userId = params[1];
@@ -35,7 +35,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 			entity.addPart("file", fileBody);
 			entity.addPart("userId", new StringBody(userId, Charset.forName("UTF-8")));
 			entity.addPart("channelId", new StringBody(clientId, Charset.forName("UTF-8")));
-			
+
 			httpPost.setEntity(entity);
 			httpClient.execute(httpPost);
 		} catch (ClientProtocolException e) {
@@ -50,7 +50,6 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 	@Override
 	protected void onPostExecute(File file) {
 		super.onPostExecute(file);
-		
 		FileUtil.deleteFile(file);
 	}
 
