@@ -1,6 +1,7 @@
 package com.eucsoft.beeper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
@@ -11,13 +12,15 @@ import com.eucsoft.beeper.http.test.PlayAudioButtonListener;
 import com.eucsoft.beeper.http.test.TestButtonListener;
 
 public class MainActivity extends Activity {
-
+	
+	static public Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		addListenerOnButtons();
+		context = this;
 	}
 
 	@Override
@@ -36,7 +39,6 @@ public class MainActivity extends Activity {
 		
 		Button playAudioButton = (Button) findViewById(R.id.playButton);
 		playAudioButton.setOnClickListener(new PlayAudioButtonListener());
-
 	}
 
 }
