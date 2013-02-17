@@ -1,5 +1,9 @@
 package com.eucsoft.beeper;
 
+import java.io.IOException;
+
+import com.eucsoft.beeper.server.Server;
+
 public class Beeper {
 	
 	public static String onMessage() {
@@ -11,6 +15,12 @@ public class Beeper {
 	}
 
 	public static String connect() {
+		try {
+			Server.connect();
+			return Server.send("{action: connect, id: 456456456, info: android-test}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

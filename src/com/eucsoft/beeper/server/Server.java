@@ -23,7 +23,9 @@ public class Server {
 	}
 	
 	public static void connect() throws IOException {
-		socket = new Socket();
+		if (Server.socket == null) {
+			Server.socket = new Socket();
+		}
 		input = socket.getInputStream();
 		output = socket.getOutputStream();
 	}

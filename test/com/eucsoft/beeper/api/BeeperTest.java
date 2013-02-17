@@ -14,9 +14,7 @@ public class BeeperTest extends AndroidTestCase {
 	public void connectTest() throws IOException {
 		Server.setSocket(new SocketMock());
 		
-		Beeper.connect();
-		Server.connect();
-		String actual = Server.send("{action: connect, id: 456456456, info: android-test}");
+		String actual = Beeper.connect();
 		String expected = "{action: connect, status: 200}";
 		assertEquals(expected, actual);
 	}
