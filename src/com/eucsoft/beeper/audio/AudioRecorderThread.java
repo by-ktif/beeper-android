@@ -38,20 +38,28 @@ public class AudioRecorderThread extends Thread {
 		int iBufferReadResult;
 		bytesReadCount = 0;
 		
-		File file = new File(FileUtil.getUniqFilePath());
-		 
+		File beeperDir = FileUtil.getBeeperFolder();
+		String uniqFilePath = beeperDir.getAbsolutePath() + "/" + "beeper.rec";
+		
+		File file = new File(uniqFilePath);
+		
+		FileWriter fw = null;
 		// if file doesnt exists, then create it
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
-				FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
-		
+		try {
+			fw = new FileWriter(file.getAbsoluteFile());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		while (!interrupted()) {
@@ -64,15 +72,14 @@ public class AudioRecorderThread extends Thread {
 			}
 			bytesReadCount = bytesReadCount + iBufferReadResult;
 			for (int i = 0; i < iBufferReadResult; i++) {
-				/*try {
-					bos.write(buffer[i]);
+				try {
+					bw.write(buffer[i]);
 				} catch (IOException e) {
 					e.printStackTrace();
-				}*/
+				}
 			}
 		}
 		 recorder.stop();
-		 //recordButton.setText(""+bytesReadCount);
 	}
 
 	public int getBytesReadCount() {
