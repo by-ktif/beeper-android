@@ -1,6 +1,10 @@
 package com.eucsoft.beeper.audio;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -8,6 +12,8 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder.AudioSource;
 import android.widget.Button;
+
+import com.eucsoft.beeper.file.FileUtil;
 
 public class AudioRecorderThread extends Thread {
 
@@ -26,10 +32,28 @@ public class AudioRecorderThread extends Thread {
 
 	@Override
 	public void run() {
+		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 		recorder.startRecording();
 		byte[] buffer = new byte[iAudioBufferSize];
 		int iBufferReadResult;
 		bytesReadCount = 0;
+		
+		File file = new File(FileUtil.getUniqFilePath());
+		 
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
+		BufferedWriter bw = new BufferedWriter(fw);
+		
 		while (!interrupted()) {
 			iBufferReadResult = recorder.read(buffer, 0, iAudioBufferSize);
 			// Android is reading less number of bytes than requested.
