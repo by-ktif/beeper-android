@@ -2,28 +2,29 @@ package com.eucsoft.beeper.http;
 
 import java.io.File;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.os.AsyncTask;
 
+import com.eucsoft.beeper.application.ApplicationContext;
 import com.eucsoft.beeper.file.FileUtil;
 
 public class SendMessageTask extends AsyncTask<String, Void, File> {
 
 	@Override
 	protected File doInBackground(String... params) {
-<<<<<<< HEAD
-=======
+
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(ApplicationContext.serverUrl + "/"+ ApplicationContext.uploadUrl);
 
->>>>>>> remotes/by-ktif/master
 		String filePath = params[0];
 		File file = new File(filePath);
 		String userId = params[1];
 		String clientId = params[2];
 
-<<<<<<< HEAD
-=======
-		try {
+/*		try {
 			MultipartEntity entity = new MultipartEntity();
 			FileBody fileBody = new FileBody(file);
 			entity.addPart("file", fileBody);
@@ -37,8 +38,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
->>>>>>> remotes/by-ktif/master
+*/
 		return file;
 	}
 
