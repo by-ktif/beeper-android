@@ -12,10 +12,10 @@ import com.eucsoft.beeper.server.Server;
 public class BeeperTest extends AndroidTestCase {
 	
 	public void connectTest() throws IOException {
-		Server.setSocket(new SocketMock());
+		String expected = "{action: connect, status: 200}";
+		Server.setSocket(new SocketMock(expected));
 		
 		String actual = Beeper.connect();
-		String expected = "{action: connect, status: 200}";
 		assertEquals(expected, actual);
 	}
 	

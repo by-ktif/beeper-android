@@ -9,6 +9,12 @@ import java.nio.channels.SocketChannel;
 
 public class SocketMock extends Socket {
 	
+	private String answer = ""; 
+	
+	public SocketMock (String answer) {
+		this.answer = answer;
+	}
+	
 	@Override
 	public void bind(SocketAddress bindpoint) {
 	}
@@ -37,7 +43,7 @@ public class SocketMock extends Socket {
 
 	@Override
 	public InputStream getInputStream() {
-		return new InputStreamMock();
+		return new InputStreamMock(answer);
 	}
 
 	@Override

@@ -57,7 +57,6 @@ public class Server {
 			}
 			
 			if (requset.size() > 0) {
-				System.out.println("Server receive: " + new String(requset.toByteArray()));
 				return requset.toByteArray();
 			} else {
 				return null;
@@ -74,7 +73,6 @@ public class Server {
 	
 	private static void write(byte[] request) {
 		try {
-			System.out.println("Server send: " + new String(request));
 			output.write(request);
 		} catch (IOException e) {
 			e.printStackTrace();
