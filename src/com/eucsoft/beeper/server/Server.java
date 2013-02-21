@@ -24,7 +24,7 @@ public class Server {
 	
 	public static void connect() throws IOException {
 		if (Server.socket == null) {
-			Server.socket = new Socket();
+			Server.socket = new Socket(Config.BEEPER_HOST, Config.BEEPER_PORT);
 		}
 		input = socket.getInputStream();
 		output = socket.getOutputStream();
