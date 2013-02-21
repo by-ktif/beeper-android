@@ -1,15 +1,9 @@
 package com.eucsoft.beeper.http;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
@@ -21,6 +15,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 
 	@Override
 	protected File doInBackground(String... params) {
+
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(ApplicationContext.serverUrl + "/"+ ApplicationContext.uploadUrl);
 
@@ -29,7 +24,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 		String userId = params[1];
 		String clientId = params[2];
 
-		try {
+/*		try {
 			MultipartEntity entity = new MultipartEntity();
 			FileBody fileBody = new FileBody(file);
 			entity.addPart("file", fileBody);
@@ -43,7 +38,7 @@ public class SendMessageTask extends AsyncTask<String, Void, File> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+*/
 		return file;
 	}
 
