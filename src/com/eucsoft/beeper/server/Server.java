@@ -24,7 +24,7 @@ public class Server {
 	
 	public static void connect() throws IOException {
 		if (Server.socket == null) {
-			Server.socket = new Socket();
+			Server.socket = new Socket(Config.SERVER_HOST, Config.SERVER_PORT);
 		}
 		input = socket.getInputStream();
 		output = socket.getOutputStream();
