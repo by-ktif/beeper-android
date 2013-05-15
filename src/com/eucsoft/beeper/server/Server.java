@@ -32,15 +32,15 @@ public class Server {
 	
 	public static String send(String message) {
 		write(message.getBytes());
-		return new String( read() );
+		return null;//new String( read() );
 	}
 	
 	public static String send(byte[] message) {
 		write(message);
-		return new String( read() );
+		return null;//new String( read() );
 	}
 	
-	private static byte[] read() {
+	public static byte[] read() {
 		try {
 			socket.setSoTimeout(Config.SOCKET_TIMEOUT);
 			byte[] buffer = new byte[ Config.BUFFER_READ_SIZE ];
@@ -53,7 +53,8 @@ public class Server {
 				if (messageSize == -1) {
 					break;
 				}
-				requset.write(buffer, 0, messageSize);
+				return buffer;
+				//requset.write(buffer, 0, messageSize);
 			}
 			
 			if (requset.size() > 0) {

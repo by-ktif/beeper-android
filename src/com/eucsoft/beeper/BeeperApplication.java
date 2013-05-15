@@ -2,7 +2,6 @@ package com.eucsoft.beeper;
 
 import java.net.Socket;
 
-import android.R.string;
 import android.app.Application;
 import android.content.Context;
 

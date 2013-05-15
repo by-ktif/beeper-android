@@ -13,6 +13,8 @@ import android.media.AudioTrack;
 import android.media.MediaRecorder.AudioSource;
 import android.widget.Button;
 
+import com.eucsoft.beeper.Beeper;
+import com.eucsoft.beeper.audio.codec.ADPCM;
 import com.eucsoft.beeper.file.FileUtil;
 
 public class AudioRecorderThread extends Thread {
@@ -70,14 +72,10 @@ public class AudioRecorderThread extends Thread {
 						+ recorder.read(buffer, iBufferReadResult - 1,
 								iAudioBufferSize - iBufferReadResult);
 			}
-			bytesReadCount = bytesReadCount + iBufferReadResult;
-			for (int i = 0; i < iBufferReadResult; i++) {
-				try {
-					bw.write(buffer[i]);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			//bytesReadCount = bytesReadCount + iBufferReadResult;
+			byte[] compressed = ADPCM.compress(buffer);
+			bytesReadCount+=compressed.length;
+			Beeper.sendMessage(compressed);
 		}
 		 recorder.stop();
 	}

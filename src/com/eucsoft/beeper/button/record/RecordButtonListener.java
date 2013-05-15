@@ -5,10 +5,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
-import com.eucsoft.beeper.application.ApplicationContext;
-import com.eucsoft.beeper.audio.AudioRecorder;
 import com.eucsoft.beeper.audio.AudioRecorderThread;
-import com.eucsoft.beeper.http.SendMessageTask;
 
 public class RecordButtonListener implements OnTouchListener{
 	
