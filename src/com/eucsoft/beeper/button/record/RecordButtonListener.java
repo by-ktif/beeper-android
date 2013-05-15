@@ -5,13 +5,12 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
-import com.eucsoft.beeper.application.ApplicationContext;
-import com.eucsoft.beeper.audio.AudioRecorder;
-import com.eucsoft.beeper.http.SendMessageTask;
+import com.eucsoft.beeper.audio.AudioRecorderThread;
 
 public class RecordButtonListener implements OnTouchListener{
 	
-	AudioRecorder recorder;
+	//AudioRecorder recorder = new AudioRecorder();
+	AudioRecorderThread recorderThread;
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
@@ -29,15 +28,16 @@ public class RecordButtonListener implements OnTouchListener{
 	
 	private void onDown(View v) {
 		v.setPressed(true);
-		
-		recorder = new AudioRecorder();
-		recorder.startRecording();
+		recorderThread = new AudioRecorderThread();
+        recorderThread.start();
 	}
 	
 	private void onUp(View v) {
 		v.setPressed(false);
-		String filePath = recorder.stopRecording();
-		new SendMessageTask().execute(filePath, ApplicationContext.userId, ApplicationContext.channelId);
+		recorderThread.interrupt();
+		
+		Button recordButton = ((Button)v);
+		recordButton.setText(recorderThread.getBytesReadCount()+"");
 	}
 	
 	private void addNumberToButton(View v) {
@@ -49,7 +49,7 @@ public class RecordButtonListener implements OnTouchListener{
 		} catch(Exception e) {
 			countPress = 0;
 		}
-		recordButton.setText(String.valueOf(++countPress));
+		//recordButton.setText(String.valueOf(++countPress));
 	}
 	
 	

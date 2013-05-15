@@ -3,24 +3,21 @@ package com.eucsoft.beeper.audio;
 import java.io.IOException;
 
 import android.media.MediaRecorder;
+import android.os.ParcelFileDescriptor;
 
-import com.eucsoft.beeper.file.FileUtil;
+import com.eucsoft.beeper.BeeperApplication;
 
 public class AudioRecorder {
 
-	private MediaRecorder recorder;
-	private String filePath;
+	private MediaRecorder recorder = new MediaRecorder();
 
 	public void startRecording() {
-		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-			
-		filePath = FileUtil.getUniqFilePath();
-		
+		final ParcelFileDescriptor pfd = ParcelFileDescriptor.fromSocket(BeeperApplication.getClientSocket());
+		recorder.setOutputFile(pfd.getFileDescriptor());	
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		recorder.setOutputFile(filePath);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
+		
 		try {
 			recorder.prepare();
 		} catch (IOException e) {
@@ -30,11 +27,16 @@ public class AudioRecorder {
 		recorder.start();
 	}
 
-	public String stopRecording() {
+	public void stopRecording() {
+		
 		recorder.stop();
 		recorder.release();
-		recorder = null;
-		return filePath;
+		try {
+			BeeperApplication.getClientSocket().shutdownOutput();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

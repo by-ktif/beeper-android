@@ -31,7 +31,8 @@ public class Beeper {
 	public static void startSendMessage() {
 	}
 	
-	public static void sendMessage() {
+	public static void sendMessage(byte[] bytes) {
+		Server.send(bytes);
 	}
 	
 	public static void endSendMessage() {

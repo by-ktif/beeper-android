@@ -17,7 +17,7 @@ public class FileUtil {
 		return uniqFile.getAbsolutePath();
 	}
 
-	private static File getBeeperFolder() {
+	public static File getBeeperFolder() {
 		//TODO: move hardcoded beeper folder to ApplicationContext
 		File beeperDir = new File(Environment.getExternalStorageDirectory() + "/beeper");
         if (!beeperDir.exists()) {

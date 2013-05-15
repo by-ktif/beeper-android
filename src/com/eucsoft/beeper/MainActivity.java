@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.eucsoft.beeper.audio.AudioPlayThread;
 import com.eucsoft.beeper.button.record.RecordButtonListener;
 import com.eucsoft.beeper.http.test.PlayAudioButtonListener;
 import com.eucsoft.beeper.http.test.TestButtonListener;
@@ -33,6 +34,11 @@ public class MainActivity extends Activity {
 	private void addListenerOnButtons() {
 		ImageButton changeButton = (ImageButton) findViewById(R.id.spinRouletteButton);
 		changeButton.setOnClickListener(new TestButtonListener());
+		
+		Beeper.connect();
+		
+		AudioPlayThread playThread = new AudioPlayThread();
+		playThread.start();
 		
 		Button button = (Button) findViewById(R.id.recordButton);
 		button.setOnTouchListener(new RecordButtonListener());
